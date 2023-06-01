@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === "development") {
   // 開発用リクエスト内容表示
   app.use((req, _, next) => {
     console.log(`Request: ${req.method} ${req.url}`);
-    console.log(`Request Body: ${JSON.stringify(req.body)}`);
+    console.log(`Request Body: ${JSON.stringify(req.body)}`, "\n");
     next();
   });
 }

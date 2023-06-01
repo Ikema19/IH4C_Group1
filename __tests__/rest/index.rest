@@ -1,4 +1,13 @@
 @baseUrl = http://localhost:3001/api/v1
 
-### テスト
-GET {{baseUrl}}/
+### 観光スポット一覧取得
+GET {{baseUrl}}/spots
+
+### 観光スポット詳細取得
+GET {{baseUrl}}/spots/1
+
+### モデルコース一覧取得
+GET {{baseUrl}}/courses/models
+
+### モデルコース詳細取得
+GET {{baseUrl}}/courses/models/1
