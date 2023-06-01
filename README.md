@@ -13,6 +13,8 @@
 
 - Node.js
 
+- REST Client
+
 ### 実行
 
 ```bash

@@ -1,4 +1,5 @@
 const express = require("express");
+const { v1Router } = require("./router/v1");
 
 const app = express();
 
@@ -16,11 +17,7 @@ if (process.env.NODE_ENV === "development") {
   });
 }
 
-app.route("/").get((_, res) => {
-  res.status(200).send({
-    message: "Hello World!",
-  });
-});
+app.use("/api/v1", v1Router);
 
 // エラーハンドリング
 
