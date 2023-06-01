@@ -1,0 +1,28 @@
+{
+  "name": "ih4c_group1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --config webpack.dev.js --watch & nodemon dist/index.js",
+    "build": "webpack --config webpack.prod.js",
+    "start": "pm2 start dist/index.js --name ih4c_group1",
+    "pm2:stop": "pm2 delete all",
+    "pm2:logs": "pm2 logs",
+    "deploy": "npm run build && npm run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "pm2": "^5.3.0",
+    "webpack": "^5.85.0",
+    "webpack-cli": "^5.1.1",
+    "webpack-merge": "^5.9.0",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
