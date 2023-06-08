@@ -1,5 +1,5 @@
-const express = require("express");
-const { v1Router } = require("./router/v1");
+import express from "express";
+import { v1Router } from "./router/v1";
 
 const app = express();
 
