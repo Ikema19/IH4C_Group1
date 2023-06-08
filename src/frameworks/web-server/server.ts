@@ -1,5 +1,6 @@
 import express from "express";
 import { v1Router } from "./router/v1";
+import { errorHandling } from "./middleware/errorHandling";
 
 const app = express();
 
@@ -20,5 +21,6 @@ if (process.env.NODE_ENV === "development") {
 app.use("/api/v1", v1Router);
 
 // エラーハンドリング
+errorHandling(app);
 
 module.exports = app;
