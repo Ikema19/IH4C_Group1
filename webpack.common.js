@@ -8,7 +8,7 @@ const SRC_ROOT = path.join(__dirname, "/src");
 module.exports = {
   context: SRC_ROOT,
   target: "node",
-  entry: path.resolve("src/frameworks/web-server", "index.js"),
+  entry: path.resolve("src/frameworks/web-server", "index.ts"),
   externals: [nodeExternals()],
   output: {
     filename: "index.js",
@@ -28,9 +28,10 @@ module.exports = {
   },
   plugins: [],
   resolve: {
-    extensions: [".js", ".json"],
+    extensions: [".ts"],
     alias: {
       "@": path.join(__dirname, "/src/"),
+      "@tests": path.join(__dirname, "/__tests__/"),
     },
   },
 };
