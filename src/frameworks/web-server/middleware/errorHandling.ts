@@ -1,5 +1,6 @@
 import type { Express, Request, Response, NextFunction } from "express";
 import { Exception } from "@/utils/exception";
+import logger from "@/utils/logger";
 
 type ErrorResponse = {
   message: string;
@@ -21,6 +22,8 @@ export const errorHandling = (app: Express) => {
       __: NextFunction,
     ) => {
       if (error instanceof Exception) {
+        if (error.isInternalError) logger.error(error.stack || error.message);
+
         const status = error.status;
         const body = {
           message: error.message,
@@ -29,6 +32,7 @@ export const errorHandling = (app: Express) => {
         res.status(status).send(body);
         return;
       }
+      logger.error(error.stack || error.message);
 
       res.status(defaultErrorResponse.status).send(defaultErrorResponse.body);
     },
