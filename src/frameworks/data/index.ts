@@ -73,6 +73,34 @@ export const spots = [
       },
     },
   },
+  {
+    id: "6",
+    name: "鵜の浜海岸温泉",
+    description:
+      "海水浴をはじめサーフィンなどのマリンスポーツも盛んな場所です。また地引網体験もでき、イベントも充実しています。捕れた魚は持ち帰り、または宿泊の宿で調理も可能。また、恋人の聖地ということで石像と金の看板があり、カップルにもおすすめです。",
+    category: "レジャー・スポーツ・体験施設",
+    photo: "https://example.com/photo6.jpg",
+    geometry: {
+      location: {
+        lat: 37.24176,
+        lng: 138.33796,
+      },
+    },
+  },
+  {
+    id: "7",
+    name: "高田城址公園",
+    description:
+      "高田城跡に作られた公園。新潟県の史跡に指定されています。園内には復元された櫓や博物館など様々な施設があります。特に桜は有名で公園周辺も含めると4000本もあるといわれております。",
+    category: "歴史・文化",
+    photo: "https://example.com/photo7.jpg",
+    geometry: {
+      location: {
+        lat: 37.10803,
+        lng: 138.2548,
+      },
+    },
+  },
 ] as const satisfies DeepReadonly<Spot[]>;
 
 type Course = Omit<BaseCourseType, "route"> & {
