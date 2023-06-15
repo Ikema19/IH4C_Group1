@@ -23,6 +23,7 @@ export type Spot = {
   id: Id;
   name: string;
   description: string;
+  category: string;
   photo: string;
   geometry: SpotGeometry;
 };
