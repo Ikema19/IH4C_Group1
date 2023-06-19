@@ -1,108 +1,56 @@
-import {
-  fetchModelCourseById,
-  fetchModelCourses,
-} from "@/modules/core/course/application/usecase";
-import {
-  fetchSpotById,
-  fetchSpots,
-} from "@/modules/core/spot/application/usecase";
 import express from "express";
+import { courses, spots } from "@/frameworks/data";
+import { Exception } from "@/utils/exception";
 
 const v1Router = express.Router();
 
 v1Router.get("/spots", (_, res) => {
-  const result = fetchSpots();
-  console.log(result);
-
   res.status(200).send({
-    spots: [
-      {
-        id: "1",
-        name: "Spot 1",
-        description: "Description 1",
-        photo: "https://example.com/photo1.jpg",
-        geometry: {
-          location: {
-            lat: 11.111111,
-            lng: 11.111111,
-          },
-        },
-      },
-    ],
+    spots,
   });
 });
-v1Router.get("/spots/:spotId", (_, res) => {
-  const result = fetchSpotById();
-  console.log(result);
+
+v1Router.get("/spots/:spotId", (req, res) => {
+  const { spotId } = req.params;
+  const spot = spots.find((spot) => spot.id === spotId);
 
   res.status(200).send({
-    spot: {
-      id: "1",
-      name: "Spot 1",
-      description: "Description 1",
-      photo: "https://example.com/photo1.jpg",
-      geometry: {
-        location: {
-          lat: 11.111111,
-          lng: 11.111111,
-        },
-      },
-    },
+    spot,
   });
 });
 
 v1Router.get("/courses/models", (_, res) => {
-  const result = fetchModelCourses();
-  console.log(result);
+  const modelCourses = courses.map((course) => {
+    const route = course.route.map((routeId) => {
+      return spots.find((spot) => spot.id === routeId);
+    });
+
+    return {
+      ...course,
+      route,
+    };
+  });
 
   res.status(200).send({
-    courses: [
-      [
-        {
-          id: "1",
-          name: "Sports1",
-          photo: "https://example.com/photo1.jpg",
-        },
-        {
-          id: "2",
-          name: "Sports2",
-          photo: "https://example.com/photo2.jpg",
-        },
-      ],
-    ],
+    courses: modelCourses,
   });
 });
-v1Router.get("/courses/models/:modelId", (_, res) => {
-  const result = fetchModelCourseById();
-  console.log(result);
+v1Router.get("/courses/models/:modelId", (req, res) => {
+  const { modelId } = req.params;
+
+  const findedCourse = courses.find((course) => course.id === modelId);
+  if (!findedCourse)
+    throw new Exception("モデルコースが見つかりませんでした", 404);
+
+  const course = {
+    ...findedCourse,
+    route: findedCourse.route.map((routeId) => {
+      return spots.find((spot) => spot.id === routeId);
+    }),
+  };
 
   res.status(200).send({
-    course: [
-      {
-        id: "1",
-        name: "Sports1",
-        description: "Description 1",
-        photo: "https://example.com/photo1.jpg",
-        geometry: {
-          location: {
-            lat: 11.111111,
-            lng: 11.111111,
-          },
-        },
-      },
-      {
-        id: "2",
-        name: "Sports2",
-        description: "Description 2",
-        photo: "https://example.com/photo2.jpg",
-        geometry: {
-          location: {
-            lat: 22.222222,
-            lng: 22.222222,
-          },
-        },
-      },
-    ],
+    course,
   });
 });
 
