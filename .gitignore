@@ -1,7 +1,1 @@
 node_modules
-.eslintcache
-
-/dist
-/log/*
-
-!.gitkeep
